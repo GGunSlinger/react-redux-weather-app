@@ -1,0 +1,22 @@
+{
+  "cities": [
+    {
+      "city": "Paris",
+      "lat": 48.86,
+      "lon": 2.35,
+      "id": 1
+    },
+    {
+      "city": "London",
+      "lat": 51.51,
+      "lon": -0.13,
+      "id": 5
+    },
+    {
+      "city": "Paris",
+      "lat": 48.86,
+      "lon": 2.35,
+      "id": 6
+    }
+  ]
+}

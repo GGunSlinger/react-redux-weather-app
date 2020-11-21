@@ -1,0 +1,20 @@
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    align-items: center;
+    font-size: 20px;
+}
+
+.search {
+    position: absolute;
+    right: 10%;
+    width: 20%;
+    z-index: 999;
+}

@@ -1,0 +1,47 @@
+.wrap   {
+    margin-top: 50px;
+    color: #939698;
+    display: flex;
+    justify-content: center;
+}
+
+.list_wrap {
+    width: 90%;
+}
+
+.header_text {
+    margin-bottom: 50px;
+    margin-left: 70px;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.list_item {
+    padding-top: 10px;
+    width: 180px;
+    height: 180px;
+    border: 1px solid #939698;
+    margin: 15px 10px;
+}
+
+.list_item_header {
+    text-align: center;
+    font-size: 22px;
+}
+
+.list_item_body {
+    margin-left: 20px;
+}
+
+.list_item_text {
+    margin: 5px 0;
+    display: flex;
+}
+
+.list_item_time {
+    width: 95px;
+}
