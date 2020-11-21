@@ -1,0 +1,43 @@
+.wrap {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+    color: #939698;
+    font-size: 16px;
+}
+
+.line { 
+    width: 250px;
+    border: 1px solid #939698;
+    margin: 10px 0;
+}
+
+.list_header_text {
+    width: 100px;
+}
+
+.list_header_wrap {
+    margin-top: 50px;
+    display: flex;
+}
+
+.list_wrap {
+    display: inline-block;
+    height: 350px;
+    overflow-y: auto;
+}
+
+.list_item {
+    margin: 12px 15px 8px 0;
+    display: flex;
+}
+
+.list_item:hover {
+    transition: 0.3s;
+    transform: scale(0.99);
+    color: #93dbe9;
+}
+
+.list_item_text {
+    width: 100px;
+}

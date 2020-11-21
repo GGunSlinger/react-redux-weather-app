@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Main from './components/Main';
 import Cities from './components/Cities';
-import Today from './components/Today';
+import SingleDay from './components/SingleDay';
 import Header from './components/header/Header';
 import { Route, Switch } from 'react-router-dom';
 import Week from './components/Week';
@@ -19,9 +19,9 @@ function App() {
       }} />
       <Switch>
         <Route exact path="/" render={() => <Cities />} />
-        <Route exact path="/today/:today/:today/:today" render={() => <Today />} />
-        <Route exact path="/today" render={() => <Today />} />
-        <Route exact path="/tomorrow" render={() => <Today />} />
+        <Route exact path="/today/:city/:lat/:lon" render={() => <SingleDay />} />
+        <Route exact path="/today" render={() => <SingleDay />} />
+        <Route exact path="/tomorrow" render={() => <SingleDay />} />
         <Route exact path="/week" render={() => <Week />} />
         <Route component={NotFound} />
       </Switch>

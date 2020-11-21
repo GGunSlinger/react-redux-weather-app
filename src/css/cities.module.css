@@ -25,6 +25,14 @@
     cursor: pointer;
 }
 
+.city_item:hover {
+    transition: 0.3s;
+    transform: scale(1.04);
+    border-color: #93dbe9;
+    color: #93dbe9;
+    padding-bottom: 20px;
+  }
+
 .city_item_wrap {
     position: relative;
 }
@@ -43,6 +51,11 @@
     bottom: 10%;
     cursor: pointer;
     z-index: 999;
+  }
+  .circle.plus:hover {
+    transition: 0.3s;
+    transform: scale(1.1);
+    border-color: #93dbe9;
   }
   .circle.plus:after {
       content: '';

@@ -28,6 +28,13 @@
     margin: 15px 10px;
 }
 
+.list_item:hover {
+    transition: 0.3s;
+    transform: scale(1.03);
+    color: #000;
+    border-color: #93dbe9;
+}
+
 .list_item_header {
     text-align: center;
     font-size: 22px;
