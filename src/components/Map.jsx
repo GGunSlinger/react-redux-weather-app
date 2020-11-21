@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentWeather } from '../redux/weatherSlice';
 import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
 import { current } from '@reduxjs/toolkit';
+import Loader from '../utils/Loader';
 
 const containerStyle = {
     width: '50%',
@@ -35,7 +36,7 @@ function Map() {
         mapRef.current = map;
     }, []);
 
-    if (!lat && !lon) return <div>loading</div>
+    if (!lat && !lon) return <Loader />
 
     return (
         <GoogleMap

@@ -6,11 +6,12 @@ import Today from './components/Today';
 import Header from './components/header/Header';
 import { Route, Switch } from 'react-router-dom';
 import Week from './components/Week';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
     <div className="App">
-      <Route path="/" render={() => {
+      <Route render={() => {
         return <>
           <Header />
           <Main />
@@ -22,7 +23,7 @@ function App() {
         <Route exact path="/today" render={() => <Today />} />
         <Route exact path="/tomorrow" render={() => <Today />} />
         <Route exact path="/week" render={() => <Week />} />
-        <Route exact path="/404" render={() => <Week />} />
+        <Route component={NotFound} />
       </Switch>
     </div>
   );

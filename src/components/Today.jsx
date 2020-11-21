@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectHourlyWeather, fetchWeatherByLatLng } from '../redux/weatherSlice';
 import Map from './Map'
 import style from '../css/today.module.css';
+import Loader from '../utils/Loader';
 import { useHistory } from 'react-router-dom';
 
 function Today() {
@@ -15,16 +16,16 @@ function Today() {
 
     const today = location.split('/')[1] === 'today'
 
+    const hourlyWeather = useSelector(selectHourlyWeather)
+
     useEffect(() => {
         let lat = location.split('/')[3]
         let lon = location.split('/')[4]
-        console.log(lat, lon)
-        if (lat && lon) dispatch(fetchWeatherByLatLng(lat, lon)) // eslint-disable-next-line
-    }, []) 
-
-    const hourlyWeather = useSelector(selectHourlyWeather)
-
-    if (!hourlyWeather) return <div>loading</div>
+        if (lat && lon) dispatch(fetchWeatherByLatLng(lat, lon))
+        // eslint-disable-next-line
+    }, [])
+    
+    if (!hourlyWeather) return <Loader />
 
     const monthName = (
         today
@@ -36,8 +37,6 @@ function Today() {
             ? new Date().getDate()
             : new Date(hourlyWeather[24].dt * 1000).getDate()
     )
-
-    console.log(location.split('/')[2])
 
     return (
         <div className={style.wrap}>

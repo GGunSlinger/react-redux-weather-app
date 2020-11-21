@@ -1,17 +1,15 @@
 import React from 'react';
 import style from '../../css/header.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import LocationSearchInput from './Search';
 
 function Header() {
-
     return (
         <div className={style.wrap}>
             <div className={style.navigation}>
-                <Link to='/'>Main</Link>
-                <Link to='/today'>Today</Link>
-                <Link to='/tomorrow'>Tomorrow</Link>
-                <Link to='/week'>Week</Link>
+                <NavLink activeClassName={style.link} to='/today'>Today</NavLink>
+                <NavLink activeClassName={style.link} to='/tomorrow'>Tomorrow</NavLink>
+                <NavLink activeClassName={style.link} to='/week'>Week</NavLink>
             </div>
             <div className={style.search}>
                 <LocationSearchInput />

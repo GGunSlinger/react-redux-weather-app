@@ -89,7 +89,6 @@ export const fetchWeather = () => dispatch => {
 }
 
 export const fetchWeatherByLatLng = (lat, lng) => dispatch => {
-  if (!lat && !lng) console.log('error')
   weatherAPI.getInitWeather(lat, lng)
     .then(res => dispatch(setCurrentWeather(res.data)))
     .catch(error => console.log(error))

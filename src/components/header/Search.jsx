@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 import { useDispatch } from 'react-redux';
+import style from '../../css/header.module.css';
 import { fetchWeatherByLatLng } from '../../redux/weatherSlice'
 
 const LocationSearchInput = () => {
@@ -31,10 +32,10 @@ const LocationSearchInput = () => {
         >
             {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div>
-                    <input
+                    <input 
                         {...getInputProps({
                             placeholder: 'Find city...',
-                            className: 'location-search-input',
+                            className: `location-search-input ${style.search_input}`,
                         })}
                     />
                     <div className="autocomplete-dropdown-container">

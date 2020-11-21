@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather, selectCurrentWeather, saveCity } from '../redux/weatherSlice';
 import style from '../css/main.module.css';
 import { useHistory } from 'react-router-dom';
+import Loader from '../utils/Loader';
 
 function Main() {
 
@@ -13,13 +14,17 @@ function Main() {
     const {temp, wind_speed, sky, city, lat, lon} = useSelector(selectCurrentWeather)
 
     useEffect(() => {
-        let day = history.location.pathname.split('/')[2] === undefined
-        !city && day && dispatch(fetchWeather())
+        let location = history.location.pathname
+        let lat = location.split('/')[3]
+        let lon = location.split('/')[4]
+        !city && (!lat || !lon) && dispatch(fetchWeather())
     })
     
     const handleAdd = () => {
         return dispatch(saveCity(city, lat, lon))
     }
+
+    if (!temp) return  <div className={style.wrap}><Loader /></div>
 
     return (
         <div className={style.wrap}>
