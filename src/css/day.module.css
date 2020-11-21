@@ -35,7 +35,7 @@
 .list_item:hover {
     transition: 0.3s;
     transform: scale(0.99);
-    color: #93dbe9;
+    color: #000;
 }
 
 .list_item_text {
