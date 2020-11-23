@@ -7,4 +7,7 @@ export const weatherAPI = {
     getInitWeather(lat, lon) {
         return weather.get(`data/2.5/onecall?lat=${lat}&lon=${lon}${appId}`)
     },
+    getCityName(lat, lon) {
+        return weather.get(`data/2.5/weather?lat=${lat}&lon=${lon}${appId}`)
+    },
 }

@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectHourlyWeather, fetchWeatherByLatLng } from '../redux/weatherSlice';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import {
+    selectHourlyWeather,
+} from '../redux/weatherSlice';
 import Map from './Map'
 import style from '../css/day.module.css';
 import Loader from '../utils/Loader';
 import { useHistory } from 'react-router-dom';
 
 export default function SingleDay() {
-
-    const dispatch = useDispatch()
 
     const history = useHistory()
 
@@ -18,13 +18,6 @@ export default function SingleDay() {
 
     const hourlyWeather = useSelector(selectHourlyWeather)
 
-    useEffect(() => {
-        let lat = location.split('/')[3]
-        let lon = location.split('/')[4]
-        if (lat && lon) dispatch(fetchWeatherByLatLng(lat, lon))
-        // eslint-disable-next-line
-    }, [])
-    
     if (!hourlyWeather) return <Loader />
 
     const monthName = (
