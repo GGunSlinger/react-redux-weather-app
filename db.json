@@ -1,22 +1,22 @@
 {
   "cities": [
     {
-      "city": "Paris",
-      "lat": 48.86,
-      "lon": 2.35,
-      "id": 1
+      "city": "Frankfurt am Main",
+      "lat": 50.1109,
+      "lon": 8.6821,
+      "id": 5
     },
     {
-      "city": "Samara",
-      "lat": 53.2,
-      "lon": 50.16,
-      "id": 2
+      "city": "Chicago",
+      "lat": 41.8781,
+      "lon": -87.6298,
+      "id": 8
     },
     {
-      "city": "Miami",
-      "lat": 25.76,
-      "lon": -80.19,
-      "id": 3
+      "city": "Moscow",
+      "lat": 55.7558,
+      "lon": 37.6173,
+      "id": 9
     }
   ]
 }
