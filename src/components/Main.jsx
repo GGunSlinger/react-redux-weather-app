@@ -25,7 +25,7 @@ function Main() {
       // if location without lat lon
       dispatch(fetchWeather())
     }
-  }, [dispatch])
+  }, [dispatch, location])
 
   const handleAdd = () => {
     return dispatch(saveCity(city, lat, lon))
