@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { citiesAPI } from '../api/citiesAPI';
-import { weatherAPI } from '../api/weatherAPI';
+import { createSlice } from "@reduxjs/toolkit"
+import { citiesAPI } from "../api/citiesAPI"
+import { weatherAPI } from "../api/weatherAPI"
 
 export const weatherSlice = createSlice({
-  name: 'weather',
+  name: "weather",
   initialState: {
     cities: null,
     hourlyWeather: null,
@@ -21,7 +21,7 @@ export const weatherSlice = createSlice({
       rain: null,
       humidity: null,
       lat: null,
-      lon: null
+      lon: null,
     },
     currentCityData: {
       temp: null,
@@ -35,7 +35,7 @@ export const weatherSlice = createSlice({
       rain: null,
       humidity: null,
       lat: null,
-      lon: null
+      lon: null,
     },
   },
   reducers: {
@@ -48,13 +48,15 @@ export const weatherSlice = createSlice({
       state.currentCityData.country = action.payload.countryName
       state.currentCityData.lat = action.payload.lat
       state.currentCityData.lon = action.payload.lon
-      state.currentCityData.feels_like = Math.round(action.payload.current.feels_like)
+      state.currentCityData.feels_like = Math.round(
+        action.payload.current.feels_like
+      )
       state.currentCityData.pressure = action.payload.current.pressure
       state.currentCityData.visibility = action.payload.current.visibility
       state.currentCityData.snow = action.payload.current.snow
       state.currentCityData.rain = action.payload.current.rain
       state.currentCityData.rain = action.payload.current.humidity
-      // tomorrow 
+      // tomorrow
       state.tomorrowWeather.temp = action.payload.daily[0].temp.day
       state.tomorrowWeather.wind_speed = action.payload.daily[0].wind_speed
       state.tomorrowWeather.sky = action.payload.daily[0].weather[0].main
@@ -77,11 +79,16 @@ export const weatherSlice = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload
-    }
-  }
-});
+    },
+  },
+})
 
-export const { setCurrentWeather, setCities, setNewCity, setError } = weatherSlice.actions;
+export const {
+  setCurrentWeather,
+  setCities,
+  setNewCity,
+  setError,
+} = weatherSlice.actions
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -90,13 +97,17 @@ export const { setCurrentWeather, setCities, setNewCity, setError } = weatherSli
 
 const fetchCityName = async (lat, lon) => {
   const cityData = await weatherAPI.getCityName(lat, lon)
-  return { cityName: cityData.data.name, countryName: cityData.data.sys.country }
+  return {
+    cityName: cityData.data.name,
+    countryName: cityData.data.sys.country,
+  }
 }
 
-export const fetchWeather = () => dispatch => {
+export const fetchWeather = () => (dispatch) => {
   navigator.geolocation.getCurrentPosition(function (position) {
-    weatherAPI.getInitWeather(position.coords.latitude, position.coords.longitude)
-      .then(async res => {
+    weatherAPI
+      .getInitWeather(position.coords.latitude, position.coords.longitude)
+      .then(async (res) => {
         const nameData = await fetchCityName(res.data.lat, res.data.lon)
         dispatch(setCurrentWeather({ ...nameData, ...res.data }))
       })
@@ -104,39 +115,38 @@ export const fetchWeather = () => dispatch => {
   })
 }
 
-export const fetchWeatherByLatLng = (lat, lng) => dispatch => {
-  weatherAPI.getInitWeather(lat, lng)
-    .then(async res => {
+export const fetchWeatherByLatLng = (lat, lng) => (dispatch) => {
+  weatherAPI
+    .getInitWeather(lat, lng)
+    .then(async (res) => {
       const nameData = await fetchCityName(res.data.lat, res.data.lon)
       dispatch(setCurrentWeather({ ...nameData, ...res.data }))
     })
     .catch(() => dispatch(setError(true)))
 }
 
-export const fetchCities = () => dispatch => {
-  citiesAPI.getCities()
-    .then(res => dispatch(setCities(res.data)))
+export const fetchCities = () => (dispatch) => {
+  citiesAPI.getCities().then((res) => dispatch(setCities(res.data)))
 }
 
-export const saveCity = (city, lat, lon) => dispatch => {
+export const saveCity = (city, lat, lon) => (dispatch) => {
   citiesAPI.setCity(city, lat, lon).then(() => dispatch(fetchCities()))
 }
 
-export const removeCity = (id) => dispatch => {
+export const removeCity = (id) => (dispatch) => {
   citiesAPI.deleteCity(id).then(() => dispatch(fetchCities()))
 }
-
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.weather.value)`
 
-export const selectState = state => state.weather;
-export const selectError = state => state.weather.error;
-export const selectCities = state => state.weather.cities;
-export const selectHourlyWeather = state => state.weather.hourlyWeather;
-export const selectDailyWeather = state => state.weather.dailyWeather;
-export const selectTomorrowWeather = state => state.weather.tomorrowWeather;
-export const selectCurrentWeather = state => state.weather.currentCityData;
+export const selectState = (state) => state.weather
+export const selectError = (state) => state.weather.error
+export const selectCities = (state) => state.weather.cities
+export const selectHourlyWeather = (state) => state.weather.hourlyWeather
+export const selectDailyWeather = (state) => state.weather.dailyWeather
+export const selectTomorrowWeather = (state) => state.weather.tomorrowWeather
+export const selectCurrentWeather = (state) => state.weather.currentCityData
 
-export default weatherSlice.reducer;
+export default weatherSlice.reducer
