@@ -11,27 +11,15 @@ import NotFound from "./components/NotFound"
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Route
-        render={() => {
-          return (
-            <>
-              <Header />
-              <Main />
-            </>
-          )
-        }}
-      />
+      <Header />
+      <Main />
       <Switch>
         <Route exact path="/" render={() => <Redirect to="/main" />} />
-        <Route exact path="/main" render={() => <Cities />} />
-        <Route
-          exact
-          path="/today/:city/:lat/:lon"
-          render={() => <SingleDay />}
-        />
-        <Route exact path="/today" render={() => <SingleDay />} />
-        <Route exact path="/tomorrow" render={() => <SingleDay />} />
-        <Route exact path="/week" render={() => <Week />} />
+        <Route exact path="/main" component={Cities} />
+        <Route exact path="/today/:city/:lat/:lon" component={SingleDay} />
+        <Route exact path="/today" component={SingleDay} />
+        <Route exact path="/tomorrow" component={SingleDay} />
+        <Route exact path="/week" component={Week} />
         <Route component={NotFound} />
       </Switch>
     </div>

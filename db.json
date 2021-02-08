@@ -1,22 +1,64 @@
 {
   "cities": [
     {
-      "city": "Frankfurt am Main",
-      "lat": 50.1109,
-      "lon": 8.6821,
-      "id": 5
-    },
-    {
-      "city": "Chicago",
-      "lat": 41.8781,
-      "lon": -87.6298,
+      "city": "Smyshlyayevka",
+      "lat": 53.2546,
+      "lon": 50.2792,
       "id": 8
     },
     {
-      "city": "Moscow",
-      "lat": 55.7558,
-      "lon": 37.6173,
+      "city": "Smyshlyayevka",
+      "lat": 53.2546,
+      "lon": 50.2792,
       "id": 9
+    },
+    {
+      "city": "New York",
+      "lat": 40.7128,
+      "lon": -74.006,
+      "id": 10
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 11
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 12
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 13
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 14
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 15
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 16
+    },
+    {
+      "city": "Petra-Dubrava",
+      "lat": 53.2546,
+      "lon": 50.2792,
+      "id": 17
     }
   ]
 }

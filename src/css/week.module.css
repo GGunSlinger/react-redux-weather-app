@@ -22,8 +22,8 @@
 
 .list_item {
   padding-top: 10px;
-  min-width: 180px;
-  min-height: 180px;
+  width: 180px;
+  height: 180px;
   border: 1px solid #939698;
   margin: 15px 10px;
 }
@@ -50,5 +50,5 @@
 }
 
 .list_item_time {
-  min-width: 85px;
+  width: 95px;
 }

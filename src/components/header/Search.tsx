@@ -8,9 +8,9 @@ import { useDispatch } from "react-redux"
 import style from "../../css/header.module.css"
 import { fetchWeatherByLatLng } from "../../redux/weatherSlice"
 
-const LocationSearchInput = () => {
+const LocationSearchInput: React.FC = () => {
   const dispatch = useDispatch()
-  const [address, setAddress] = useState("")
+  const [address, setAddress] = useState<string>("")
 
   const handleChange = (address: string) => {
     setAddress(address)
@@ -18,12 +18,12 @@ const LocationSearchInput = () => {
 
   const handleSelect = (address: string) => {
     geocodeByAddress(address)
-      .then((results: any) => getLatLng(results[0]))
-      .then((latLng: any) => {
-        console.log(latLng)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
         dispatch(fetchWeatherByLatLng(latLng.lat, latLng.lng))
+        setAddress("")
       })
-      .catch((error: any) => console.error("Error", error))
+      .catch((error) => console.error("Error", error))
   }
 
   return (
@@ -33,12 +33,7 @@ const LocationSearchInput = () => {
       onChange={handleChange}
       onSelect={handleSelect}
     >
-      {({
-        getInputProps,
-        suggestions,
-        getSuggestionItemProps,
-        loading,
-      }: any) => (
+      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div>
           <input
             {...getInputProps({
@@ -48,7 +43,7 @@ const LocationSearchInput = () => {
           />
           <div className="autocomplete-dropdown-container">
             {loading && <div>Loading...</div>}
-            {suggestions.map((suggestion: any) => {
+            {suggestions.map((suggestion) => {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item"

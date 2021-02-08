@@ -1,37 +1,37 @@
 .wrap {
-    display: flex;
-    justify-content: space-between;
-    margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin: 15px;
 }
 
 .navigation {
-    display: flex;
-    justify-content: space-between;
-    width: auto;
-    align-items: center;
-    font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+  align-items: center;
+  font-size: 20px;
 }
 
 .link {
-    color: #93dbe9;
+  color: #93dbe9;
 }
 
 .navigation a {
-    margin: 0 3px;
+  margin: 0 3px;
 }
 
 .search {
-    position: absolute;
-    right: 15px;
-    width: 20%;
-    z-index: 1000;
+  position: absolute;
+  right: 15px;
+  width: 20%;
+  z-index: 1000;
 }
 
 .search_input {
-    width: 100%;
-    line-height: 25px;
-    border: 1px solid #939698;
-    padding-left: 5px;
-    border-radius: 5px;
-    font-family: sans-serif;
+  width: 100%;
+  line-height: 25px;
+  border: 1px solid #939698;
+  padding-left: 5px;
+  border-radius: 5px;
+  font-family: sans-serif;
 }

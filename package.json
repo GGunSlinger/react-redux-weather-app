@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@react-google-maps/api": "^1.13.0",
     "@reduxjs/toolkit": "^1.1.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/googlemaps": "^3.43.2",
     "@types/jest": "^24.0.0",
     "@types/json-server": "^0.14.2",
     "@types/node": "^12.0.0",
@@ -24,7 +24,8 @@
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "typescript-plugin-css-modules": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
