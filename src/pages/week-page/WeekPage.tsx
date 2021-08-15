@@ -1,12 +1,12 @@
-import React from "react"
-import { useSelector } from "react-redux"
-import { selectDailyWeather } from "../redux/weatherSlice"
-import style from "../css/week.module.css"
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectDailyWeather } from "redux/weatherSlice";
+import style from "./WeekPage.module.css";
 
-const Week: React.FC = () => {
-  const dailyWeather = useSelector(selectDailyWeather)
+const WeekPage: React.FC = () => {
+  const dailyWeather = useSelector(selectDailyWeather);
 
-  if (!dailyWeather) return <div>loading</div>
+  if (!dailyWeather) return <div>loading</div>;
 
   return (
     <div className={style.wrap}>
@@ -65,12 +65,12 @@ const Week: React.FC = () => {
                   )}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Week
+export default WeekPage;

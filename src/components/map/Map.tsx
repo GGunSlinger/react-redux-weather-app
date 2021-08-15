@@ -1,41 +1,33 @@
-import { useCallback, useState, useRef } from "react"
-import { useSelector } from "react-redux"
-import { selectCurrentWeather } from "../redux/weatherSlice"
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api"
-import Loader from "../utils/Loader"
+import { useCallback, useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentWeather } from "redux/weatherSlice";
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import Loader from "utils/loader/Loader";
 
 const containerStyle = {
   width: "50%",
   height: "350px",
-}
+};
 
 const Map: React.FC = () => {
-  const todayWeatherData = useSelector(selectCurrentWeather)
+  const todayWeatherData = useSelector(selectCurrentWeather);
 
-  const {
-    lat,
-    lon,
-    feels_like,
-    pressure,
-    wind_speed,
-    temp,
-    visibility,
-    sky,
-  } = todayWeatherData
+  const { lat, lon, feels_like, pressure, wind_speed, temp, visibility, sky } =
+    todayWeatherData;
 
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const center = {
     lat: lat,
     lng: lon,
-  }
+  };
 
-  const mapRef = useRef()
+  const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
-    mapRef.current = map
-  }, [])
+    mapRef.current = map;
+  }, []);
 
-  if (!lat && !lon) return <Loader />
+  if (!lat && !lon) return <Loader />;
 
   return (
     <GoogleMap
@@ -70,7 +62,7 @@ const Map: React.FC = () => {
         </InfoWindow>
       ) : null}
     </GoogleMap>
-  )
-}
+  );
+};
 
-export default Map
+export default Map;

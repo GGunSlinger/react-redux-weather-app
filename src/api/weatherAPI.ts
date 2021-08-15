@@ -3,7 +3,8 @@ import axios, { AxiosInstance } from "axios";
 const weather: AxiosInstance = axios.create({
   baseURL: "http://api.openweathermap.org/",
 });
-let appId = process.env.REACT_APP_WEATHER_API;
+
+const appId = process.env.REACT_APP_WEATHER_API;
 
 type cityName = {
   name: string;

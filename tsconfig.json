@@ -1,12 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es6"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "es6"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -22,8 +18,5 @@
     "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "jsx": "react-jsx"
   },
-  "include": [
-    "src",
-    "**.ts"
-  ]
+  "include": ["src", "**.ts"]
 }
