@@ -1,11 +1,9 @@
-import { citiesType } from "./../types/types";
+import { citiesType } from "types/types";
 import axios, { AxiosInstance } from "axios";
 
-const baseURL = process.env.PORT
-  ? "https://react-ts-weather-app.herokuapp.com/"
-  : `http://localhost:${process.env.REACT_APP_PORT}/`;
-
-const cities: AxiosInstance = axios.create({ baseURL });
+const cities: AxiosInstance = axios.create({
+  baseURL: "https://wether-app-server.herokuapp.com/",
+});
 
 export const citiesAPI = {
   getCities() {
