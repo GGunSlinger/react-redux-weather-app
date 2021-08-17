@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const weather: AxiosInstance = axios.create({
-  baseURL: "http://api.openweathermap.org/",
+  baseURL: "https://api.openweathermap.org/",
 });
 
 const appId = process.env.REACT_APP_WEATHER_API;
