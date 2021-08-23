@@ -1,12 +1,16 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchWeatherByLatLng, selectHourlyWeather } from "redux/weatherSlice";
+import { shallowEqual, useSelector } from "react-redux";
+import { selectCurrentWeather, selectHourlyWeather } from "store/selectors";
 import Map from "components/map/Map";
 import style from "./CurrentDayPage.module.css";
 import Loader from "utils/loader/Loader";
 import { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { HourlyWeatherType } from "types/types";
+import { HourlyWeather } from "models/weather";
+import { useAppDispatch } from "models/store";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { fetchWeather } from "store/actions";
+import { RootState } from "store/store";
 
 type LatLonType = {
   lat: string | undefined;
@@ -16,17 +20,31 @@ type LatLonType = {
 const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
   match,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const today = match.url.split("/")[1] === "today";
 
-  const hourlyWeather = useSelector(selectHourlyWeather);
+  const mapState = (state: RootState) => ({
+    hourlyWeather: selectHourlyWeather(state),
+    currentCityData: selectCurrentWeather(state),
+  });
+
+  const { hourlyWeather, currentCityData } = useSelector(
+    mapState,
+    shallowEqual
+  );
+
+  console.log(match.params);
 
   let { lat, lon } = match.params;
 
+  const fetchData = async (lat: number, lon: number) => {
+    unwrapResult(await dispatch(fetchWeather({ lat, lon })));
+  };
+
   useEffect(() => {
-    if (lat && lon) dispatch(fetchWeatherByLatLng(+lat, +lon));
-  }, [dispatch, lat, lon]);
+    if (lat && lon) fetchData(+lat, +lon);
+  }, [lat, lon]);
 
   if (!hourlyWeather) return <Loader />;
 
@@ -53,7 +71,7 @@ const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
         </div>
         <div className={style.line}></div>
         <div className={style.list_wrap}>
-          {hourlyWeather.map((element: HourlyWeatherType, index: number) => {
+          {hourlyWeather.map((element: HourlyWeather, index: number) => {
             const day = today ? index <= 23 : index >= 24;
             if (day && index % 3 === 0) {
               return (

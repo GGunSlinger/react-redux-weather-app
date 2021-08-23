@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { WeeklyWeather, CurrentWeatherApiRes } from "models/weather";
 
 const weather: AxiosInstance = axios.create({
   baseURL: "https://api.openweathermap.org/",
@@ -6,26 +7,14 @@ const weather: AxiosInstance = axios.create({
 
 const appId = process.env.REACT_APP_WEATHER_API;
 
-type cityName = {
-  name: string;
-  sys: {
-    country: string;
-  };
-};
-
-type initWeatherType = {
-  lat: number;
-  lon: number;
-};
-
 export const weatherAPI = {
-  getInitWeather(lat: number, lon: number) {
-    return weather.get<initWeatherType>(
+  getWeather(lat: number, lon: number) {
+    return weather.get<WeeklyWeather>(
       `data/2.5/onecall?lat=${lat}&lon=${lon}${appId}`
     );
   },
-  getCityName(lat: number, lon: number) {
-    return weather.get<cityName>(
+  getWeatherWithLocationNames(lat: number, lon: number) {
+    return weather.get<CurrentWeatherApiRes>(
       `data/2.5/weather?lat=${lat}&lon=${lon}${appId}`
     );
   },

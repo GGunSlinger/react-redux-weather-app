@@ -3,26 +3,29 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import { useDispatch } from "react-redux";
 import style from "./Header.module.css";
-import { fetchWeatherByLatLng } from "redux/weatherSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useAppDispatch } from "models/store";
+import { fetchWeather } from "store/actions";
 
 const LocationSearchInput: React.FC = () => {
-  const dispatch = useDispatch();
-  const [address, setAddress] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const [address, setAddress] = useState("");
 
   const handleChange = (address: string) => {
     setAddress(address);
   };
 
-  const handleSelect = (address: string) => {
-    geocodeByAddress(address)
-      .then((results) => getLatLng(results[0]))
-      .then((latLng) => {
-        dispatch(fetchWeatherByLatLng(latLng.lat, latLng.lng));
-        setAddress("");
-      })
-      .catch((error) => console.error("Error", error));
+  const handleSelect = async (address: string) => {
+    try {
+      const geocode = await geocodeByAddress(address);
+      const { lat, lng } = await getLatLng(geocode[0]);
+
+      unwrapResult(await dispatch(fetchWeather({ lat, lon: lng })));
+      setAddress("");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

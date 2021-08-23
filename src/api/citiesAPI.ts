@@ -1,4 +1,4 @@
-import { citiesType } from "types/types";
+import { City } from "models/weather";
 import axios, { AxiosInstance } from "axios";
 
 const cities: AxiosInstance = axios.create({
@@ -7,13 +7,13 @@ const cities: AxiosInstance = axios.create({
 
 export const citiesAPI = {
   getCities() {
-    return cities.get<citiesType[]>("cities");
+    return cities.get<City[]>("cities");
   },
   deleteCity(id: number) {
-    return cities.delete<citiesType>(`cities/${id}`);
+    return cities.delete<City>(`cities/${id}`);
   },
   setCity(city: string, lat: number, lon: number) {
-    return cities.post<citiesType>("cities", {
+    return cities.post<City>("cities", {
       city: city,
       lat: lat,
       lon: lon,

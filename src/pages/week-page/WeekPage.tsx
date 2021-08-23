@@ -1,16 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectDailyWeather } from "redux/weatherSlice";
+import { shallowEqual, useSelector } from "react-redux";
+import { selectDailyWeather } from "store/selectors";
 import style from "./WeekPage.module.css";
 
 const WeekPage: React.FC = () => {
-  const dailyWeather = useSelector(selectDailyWeather);
+  const dailyWeather = useSelector(selectDailyWeather, shallowEqual);
 
   if (!dailyWeather) return <div>loading</div>;
 
   return (
     <div className={style.wrap}>
-      <div className={style.list_wrap}>
+      <div className={style.wrap_inner}>
         <div className={style.header_text}>
           <h2>Week</h2>
           <div>

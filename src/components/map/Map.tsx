@@ -1,6 +1,6 @@
 import { useCallback, useState, useRef } from "react";
-import { useSelector } from "react-redux";
-import { selectCurrentWeather } from "redux/weatherSlice";
+import { shallowEqual, useSelector } from "react-redux";
+import { selectCurrentWeather } from "store/selectors";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
 import Loader from "utils/loader/Loader";
 
@@ -10,24 +10,24 @@ const containerStyle = {
 };
 
 const Map: React.FC = () => {
-  const todayWeatherData = useSelector(selectCurrentWeather);
-
-  const { lat, lon, feels_like, pressure, wind_speed, temp, visibility, sky } =
-    todayWeatherData;
+  const todayWeatherData = useSelector(selectCurrentWeather, shallowEqual);
 
   const [selected, setSelected] = useState(false);
-
-  const center = {
-    lat: lat,
-    lng: lon,
-  };
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
-  if (!lat && !lon) return <Loader />;
+  if (!todayWeatherData) return <Loader />;
+
+  const { temp, wind_speed, feels_like, pressure, lat, lon, visibility } =
+    todayWeatherData;
+  console.log({ temp, wind_speed, feels_like, pressure, lat, lon, visibility });
+  const center = {
+    lat: lat,
+    lng: lon,
+  };
 
   return (
     <GoogleMap
@@ -54,7 +54,7 @@ const Map: React.FC = () => {
           <div>
             <p>temp: {temp} &#176;C</p>
             <p>feels like: {feels_like} &#176;C</p>
-            <p>sky: {sky}</p>
+            {/* <p>sky: {sky}</p> */}
             <p>pressure: {pressure}</p>
             <p>wind speed: {wind_speed} meter per second</p>
             <p>visibility: {visibility / 1000} km</p>
