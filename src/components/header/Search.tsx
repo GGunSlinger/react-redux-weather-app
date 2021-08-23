@@ -7,6 +7,7 @@ import style from "./Header.module.css";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "models/store";
 import { fetchWeather } from "store/actions";
+import { AppToaster } from "components";
 
 const LocationSearchInput: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -24,7 +25,8 @@ const LocationSearchInput: React.FC = () => {
       unwrapResult(await dispatch(fetchWeather({ lat, lon: lng })));
       setAddress("");
     } catch (e) {
-      console.log(e);
+      console.trace(e);
+      AppToaster.error({ error: e.message });
     }
   };
 

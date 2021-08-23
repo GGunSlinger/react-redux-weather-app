@@ -3,10 +3,10 @@ import { shallowEqual, useSelector } from "react-redux";
 import { selectCurrentWeather } from "store/selectors";
 import { fetchCities, fetchWeather, saveCity } from "store/actions";
 import style from "./CurrentCity.module.css";
-import Loader from "utils/loader/Loader";
 import { useHistory } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "models/store";
+import { AppToaster, Loader } from "components";
 
 const CurrentCity: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +21,8 @@ const CurrentCity: React.FC = () => {
     try {
       unwrapResult(await dispatch(fetchWeather({ lat, lon })));
     } catch (e) {
-      console.log(e);
+      console.trace(e);
+      AppToaster.error({ error: e.message });
     }
   };
 
@@ -45,8 +46,13 @@ const CurrentCity: React.FC = () => {
     currentWeather;
 
   const handleAdd = async () => {
-    unwrapResult(await dispatch(saveCity({ cityName, lat, lon })));
-    unwrapResult(await dispatch(fetchCities()));
+    try {
+      unwrapResult(await dispatch(saveCity({ cityName, lat, lon })));
+      unwrapResult(await dispatch(fetchCities()));
+    } catch (e) {
+      console.trace(e);
+      AppToaster.error({ error: e.message });
+    }
   };
 
   return (

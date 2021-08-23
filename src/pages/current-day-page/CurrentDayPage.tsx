@@ -1,9 +1,9 @@
 import React from "react";
 import { shallowEqual, useSelector } from "react-redux";
-import { selectCurrentWeather, selectHourlyWeather } from "store/selectors";
+import { selectHourlyWeather } from "store/selectors";
 import Map from "components/map/Map";
 import style from "./CurrentDayPage.module.css";
-import Loader from "utils/loader/Loader";
+import Loader from "components/loader/Loader";
 import { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { HourlyWeather } from "models/weather";
@@ -11,6 +11,7 @@ import { useAppDispatch } from "models/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { fetchWeather } from "store/actions";
 import { RootState } from "store/store";
+import { AppToaster } from "components";
 
 type LatLonType = {
   lat: string | undefined;
@@ -26,20 +27,19 @@ const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
 
   const mapState = (state: RootState) => ({
     hourlyWeather: selectHourlyWeather(state),
-    currentCityData: selectCurrentWeather(state),
   });
 
-  const { hourlyWeather, currentCityData } = useSelector(
-    mapState,
-    shallowEqual
-  );
-
-  console.log(match.params);
+  const { hourlyWeather } = useSelector(mapState, shallowEqual);
 
   let { lat, lon } = match.params;
 
   const fetchData = async (lat: number, lon: number) => {
-    unwrapResult(await dispatch(fetchWeather({ lat, lon })));
+    try {
+      unwrapResult(await dispatch(fetchWeather({ lat, lon })));
+    } catch (e) {
+      console.trace(e);
+      AppToaster.error({ error: e.message });
+    }
   };
 
   useEffect(() => {

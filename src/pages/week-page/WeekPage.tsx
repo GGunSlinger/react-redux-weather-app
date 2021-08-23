@@ -1,3 +1,4 @@
+import Loader from "components/loader/Loader";
 import React from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { selectDailyWeather } from "store/selectors";
@@ -6,7 +7,7 @@ import style from "./WeekPage.module.css";
 const WeekPage: React.FC = () => {
   const dailyWeather = useSelector(selectDailyWeather, shallowEqual);
 
-  if (!dailyWeather) return <div>loading</div>;
+  if (!dailyWeather) return <Loader />;
 
   return (
     <div className={style.wrap}>

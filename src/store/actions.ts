@@ -16,7 +16,7 @@ export const fetchWeather = createAsyncThunk(
       const current = await weatherAPI.getWeatherWithLocationNames(lat, lon);
       const cityName = current.data.name;
       const countryName = current.data.sys.country;
-      console.log(weekly.data);
+
       return { ...weekly.data, cityName, countryName };
     } catch (e) {
       return rejectWithValue(e);

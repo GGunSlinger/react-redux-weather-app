@@ -2,7 +2,7 @@ import { useCallback, useState, useRef } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { selectCurrentWeather } from "store/selectors";
 import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import Loader from "utils/loader/Loader";
+import Loader from "components/loader/Loader";
 
 const containerStyle = {
   width: "50%",
@@ -23,7 +23,7 @@ const Map: React.FC = () => {
 
   const { temp, wind_speed, feels_like, pressure, lat, lon, visibility } =
     todayWeatherData;
-  console.log({ temp, wind_speed, feels_like, pressure, lat, lon, visibility });
+
   const center = {
     lat: lat,
     lng: lon,
