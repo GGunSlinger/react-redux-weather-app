@@ -8,6 +8,8 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import { useAppDispatch } from "models/store";
 import { fetchWeather } from "store/actions";
 import { AppToaster } from "components";
+import { Card, Elevation } from "@blueprintjs/core";
+import Loader from "components/loader/Loader";
 
 const LocationSearchInput: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -42,31 +44,37 @@ const LocationSearchInput: React.FC = () => {
           <input
             {...getInputProps({
               placeholder: "Find city...",
-              className: `location-search-input ${style.search_input}`,
+              className: `${style.search_input} bp3-input `,
             })}
           />
-          <div className="autocomplete-dropdown-container">
-            {loading && <div>Loading...</div>}
-            {suggestions.map((suggestion) => {
-              const className = suggestion.active
-                ? "suggestion-item--active"
-                : "suggestion-item";
-              // inline style for demonstration purpose
-              const style = suggestion.active
-                ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                : { backgroundColor: "#ffffff", cursor: "pointer" };
-              return (
-                <div
-                  {...getSuggestionItemProps(suggestion, {
-                    className,
-                    style,
-                  })}
-                >
-                  <span>{suggestion.description}</span>
-                </div>
-              );
-            })}
-          </div>
+          {!!suggestions.length && (
+            <Card elevation={Elevation.ONE}>
+              {loading && <Loader />}
+              {!loading &&
+                suggestions.map((suggestion) => {
+                  const style = suggestion.active
+                    ? {
+                        backgroundColor: "#93dbe9",
+                        cursor: "pointer",
+                        padding: "3px 0",
+                      }
+                    : {
+                        backgroundColor: "#fff",
+                        cursor: "pointer",
+                        padding: "3px 0",
+                      };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        style,
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+            </Card>
+          )}
         </div>
       )}
     </PlacesAutocomplete>

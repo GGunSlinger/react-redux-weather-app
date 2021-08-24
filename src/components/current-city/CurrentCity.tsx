@@ -5,7 +5,7 @@ import { fetchCities, fetchWeather, saveCity } from "store/actions";
 import style from "./CurrentCity.module.css";
 import { useHistory } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { useAppDispatch } from "models/store";
+import { fetchDataWithCoords, useAppDispatch } from "models/store";
 import { AppToaster, Loader } from "components";
 
 const CurrentCity: React.FC = () => {
@@ -27,11 +27,7 @@ const CurrentCity: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!location) {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude, longitude } }) => fetchData(latitude, longitude)
-      );
-    }
+    if (!location) fetchDataWithCoords(fetchData);
   }, [location]);
 
   if (!currentWeather) {

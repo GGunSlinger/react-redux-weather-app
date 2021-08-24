@@ -10,7 +10,7 @@ import { selectCities } from "store/selectors";
 import { AppToaster } from "components";
 
 const MainPage: React.FC = () => {
-  let history = useHistory();
+  const history = useHistory();
 
   const dispatch = useAppDispatch();
   const cities = useSelector(selectCities, shallowEqual);

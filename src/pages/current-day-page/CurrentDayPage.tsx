@@ -6,16 +6,15 @@ import style from "./CurrentDayPage.module.css";
 import Loader from "components/loader/Loader";
 import { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { HourlyWeather } from "models/weather";
-import { useAppDispatch } from "models/store";
+import { fetchDataWithCoords, useAppDispatch } from "models/store";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { fetchWeather } from "store/actions";
 import { RootState } from "store/store";
 import { AppToaster } from "components";
 
 type LatLonType = {
-  lat: string | undefined;
-  lon: string | undefined;
+  lat?: string;
+  lon?: string;
 };
 
 const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
@@ -33,12 +32,23 @@ const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
 
   let { lat, lon } = match.params;
 
+  const fetchDataWithLocalCoords = async (lat: number, lon: number) => {
+    try {
+      unwrapResult(await dispatch(fetchWeather({ lat, lon })));
+    } catch (e) {
+      console.trace(e);
+      AppToaster.error({ error: e.message });
+    }
+  };
+
   const fetchData = async (lat: number, lon: number) => {
     try {
       unwrapResult(await dispatch(fetchWeather({ lat, lon })));
     } catch (e) {
       console.trace(e);
       AppToaster.error({ error: e.message });
+
+      fetchDataWithCoords(fetchDataWithLocalCoords);
     }
   };
 
@@ -71,7 +81,7 @@ const CurrentDayPage: React.FC<RouteComponentProps<LatLonType>> = ({
         </div>
         <div className={style.line}></div>
         <div className={style.list_wrap}>
-          {hourlyWeather.map((element: HourlyWeather, index: number) => {
+          {hourlyWeather.map((element, index) => {
             const day = today ? index <= 23 : index >= 24;
             if (day && index % 3 === 0) {
               return (
